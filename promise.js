@@ -130,7 +130,6 @@ const addToCalendar = (meetingDetails) => {
 */
 
 const promise1 = Promise.resolve(`Promise 1 resolved`);
-
 const promise2 = new Promise((resolve, reject) => {
     setTimeout(() => {
         resolve(`Promise 2 resolved`);
@@ -141,6 +140,21 @@ const promise2 = new Promise((resolve, reject) => {
 // promise2.then((res) => console.log(res));
 
 Promise.all([promise1, promise2])
-    .then(res => {
+    .then((res) => {
         console.log(res);
     })
+
+
+/**     .all -- .race     */
+
+const prom1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(`Prom1 resolved..`);
+    }, 2000);
+})
+const prom2 = Promise.resolve('Prom2 resolved..');
+
+Promise.all([prom1, prom2])
+    .then((res) => console.log(res));
+Promise.race([prom1, prom2])
+    .then((res) => console.log(res));

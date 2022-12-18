@@ -1,19 +1,19 @@
-async function hello() {
-    return 'hello';
-}
-console.log(hello());
+// async function hello() {
+//     return 'hello';
+// }
+// console.log(hello());
 
-async function myDisplay() {
-    let myPromise = new Promise(function (resolve, reject) {
-        resolve("I love You !!");
-    });
-    console.log(await myPromise);
-}
+// async function myDisplay() {
+//     let myPromise = new Promise(function (resolve, reject) {
+//         resolve("I love You !!");
+//     });
+//     console.log(await myPromise);
+// }
 
-// myDisplay();
+// // myDisplay();
 
 
-// example - 3
+// // example - 3
 const paymentSuccess = true;
 const marks = 90;
 
@@ -73,3 +73,41 @@ async function course() {
 }
 
 course();
+
+
+/**
+    example -4
+ */
+const hasMetting = false;
+
+const meeting = new Promise((resolve, reject) => {
+    if (!hasMetting) {
+        const meetingDetails = {
+            subject: 'Technical Meeting',
+            location: 'Google Meet',
+            time: '10:00 PM'
+        };
+        resolve(meetingDetails);
+    } else {
+        reject(new Error('Meeting already scheduled'));
+    }
+});
+
+const addToCalendar = (meetingDetails) => {
+    const calendar = `${meetingDetails.subject} has been scheduled on ${meetingDetails.location} at ${meetingDetails.time}`;
+    return Promise.resolve(calendar);
+};
+
+async function myMeeting() {
+    try {
+        const meetingDetails = await meeting;
+        const calendar = await addToCalendar(meetingDetails);
+        console.log(JSON.stringify(calendar));
+    } catch {
+        console.log(`Something wrong happend`);
+    }
+}
+
+myMeeting();
+
+console.log(`hello`);
